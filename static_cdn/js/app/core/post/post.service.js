@@ -3,7 +3,7 @@
 angular.
     module('post').
         factory('Post', function($resource){
-            var url = '/json/posts.json'
+            var url = '/static/json/posts.json'
             return $resource(url, {}, {
                 query: {
                     method: "GET",

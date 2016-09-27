@@ -21,6 +21,7 @@ from django.contrib import admin
 from django.views.generic.base import TemplateView
 from rest_framework_jwt.views import obtain_jwt_token
 
+from ang.views import AngularTemplateView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,6 +29,7 @@ urlpatterns = [
     url(r'^api/users/', include("accounts.api.urls", namespace='users-api')),
     url(r'^api/comments/', include("comments.api.urls", namespace='comments-api')),
     url(r'^api/posts/', include("posts.api.urls", namespace='posts-api')),
+    url(r'^api/templates/(?P<item>[A-Za-z0-9\_\-\.\/]+)\.html$',  AngularTemplateView.as_view())
 ]
 
 if settings.DEBUG:
