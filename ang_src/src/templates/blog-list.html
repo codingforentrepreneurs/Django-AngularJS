@@ -1,0 +1,93 @@
+
+<div class='row'>
+<div class='col-sm-6 col-sm-offset-3'>
+  <h1 ng-hide='didPerformSearch'>Blog List</h1>
+  <h1 ng-show='didPerformSearch'>Results for {{ query }}</h1>
+  <div class='row'>
+    <div class='col-sm-6'>
+  <input type='text' ng-model='query' class='form-control' placeholder='Filter' />
+</div>
+<div class='col-sm-6'>
+   <select class='form-control' ng-model='order'>
+      <option value='-publishDate'>Recent</option>
+      <option value='publishDate'>Older</option>
+      <option value='title'>A-Z</option>
+      <option value='-title'>Z-A</option>
+
+  </select>
+</div>
+</div>
+  <dir-pagination-controls ng-hide='query.length > 0' pagination-id="sub-content"></dir-pagination-controls>
+
+</div>
+
+
+
+<!-- <ul ng-if='items.length > 0'>
+    <li ng-repeat='post in items'>
+            <a ng-href='#' confirm-click='Are you ready?' confirmed-click='goToItem(post)'/>{{ post.title }} {{ post.publishDate }}</a>
+         <a href='#' ng-click='goToItem(post)'/>{{ post.title }} {{ post.publishDate }}</a> 
+            <confirm-click message='Are you positive?' post='item' eq='10+100'></confirm-click> 
+    </li>
+</ul>
+ -->
+
+<div class='row'>
+<div class='col-sm-6 col-sm-offset-3' dir-paginate='post in items | orderBy: order | filter: query | itemsPerPage: 5 as postItems' pagination-id="sub-content">
+      <div class="thumbnail">
+
+
+        <a ng-href='/blog/{{ post.id }}' ng-if='post.image'>
+          <img ng-src='{{ post.image }}' class='img-responsive'>
+        </a>
+        <div class="caption">
+          <h3><a ng-href='/blog/{{ post.id }}'>{{ post.title }}</a></h3>
+          <p>{{ post.text }} {{ post.publishDate }}</p>
+          <p><a ng-href='/blog/{{ post.id }}' class='btn btn-primary'>View</a></p>
+          <!-- <p><a ng-href='#' class='btn btn-primary' confirm-click='Are you ready?' confirmed-click='goToItem(post)'/>View</a></p> -->
+        </div>
+      </div>
+
+</div>
+
+<span ng-if='postItems.length == 0'>No Posts Found</span>
+</div>
+
+<div class='col-sm-6 col-sm-offset-3'>
+  <dir-pagination-controls ng-hide='query.length > 0' pagination-id="sub-content"></dir-pagination-controls>
+
+</div>
+
+
+
+<!-- <span ng-if='items.length == 0'>Posts coming soon</span> -->
+
+<!-- <div class="row" dir-paginate='items in colItems | filter: query | itemsPerPage: 4 as mainItems' pagination-id="main-content">
+   <div class="{{ cssClass }}" ng-repeat='post in items'>
+      <div class="thumbnail">
+        <img ng-src="{{ post.image }}" alt="...">
+        <div class="caption">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.text }} {{ post.publishDate }}</p>
+          <p><a ng-href='#' class='btn btn-primary' confirm-click='Are you ready?' confirmed-click='goToItem(post)'/>View</a></p>
+        </div>
+      </div>
+    </div>
+</div>
+
+<span ng-if='mainItems.length == 0'>No Main Items Found</span>
+
+<dir-pagination-controls ng-hide='query.length > 0' pagination-id="main-content"></dir-pagination-controls>
+ -->
+<!-- <div class="row">
+  <div class="col-sm-6 col-md-4" ng-repeat='post in items'>
+    <div class="thumbnail">
+      <img src="..." alt="...">
+      <div class="caption">
+        <h3>{{ post.title }}</h3>
+        <p>{{ post.text }} {{ post.publishDate }}</p>
+        <p><a ng-href='#' class='btn btn-primary' confirm-click='Are you ready?' confirmed-click='goToItem(post)'/>View</a></p>
+      </div>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,38 @@
+<div class='row'>
+    <div class='col-sm-8 col-sm-offset-2'>
+<div class="page-header">
+  <h1>{{ post.title }} <small>{{ post.publishDate }}</small></h1>
+</div>
+<span ng-if='post.image'>
+<img ng-src='{{ post.image }}' class='img-responsive'> <br/>
+</span>
+
+<p> {{ post.description }}</p>
+
+<hr/>
+<h3>Comments</h3>
+<div class='row' ng-show='comments.length > 0'>
+    <div class='col-sm-6'>
+        <input class='form-control' type='text' ng-model='query' placeholder='Filter Comments' /> <br/>
+    </div>
+</div>
+<ul ng-show='comments.length > 0'>
+    <li ng-repeat='comment in comments | filter: query'>
+            {{ comment.text }} <a href='#' class='btn btn-sm btn-default' confirm-click='Do you want to delete this?' confirmed-click='deleteComment(comment)'>X</a>
+    </li>
+</ul>
+
+<hr/>
+        <div class='row'>
+            <div class='col-sm-6'>
+                <p style='color:red;' ng-if='reply.text'>Preview: {{ reply.text }}</p>
+                <form ng-submit='addReply()'>
+                    <input type='hidden' ng-model='reply.id'>
+                    <textarea class='form-control'  ng-model='reply.text'></textarea>
+                    <input class='btn btn-default' type='submit'/>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
