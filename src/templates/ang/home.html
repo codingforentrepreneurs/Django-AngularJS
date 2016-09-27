@@ -1,3 +1,4 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en" ng-app='try'>
   <head>
@@ -16,25 +17,25 @@
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-resource.js'></script>
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js'></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.1.3/ui-bootstrap-tpls.min.js'></script>
-    <script src='/js/external/dirPagination.js' ></script>
-    <script src='/js/app/app.module.js' ></script>
-    <script src='/js/app/app.config.js' ></script>
+    <script src='{% static "js/external/dirPagination.js" %}' ></script>
+    <script src='{% static "js/app/app.module.js" %}' ></script>
+    <script src='{% static "js/app/app.config.js" %}' ></script>
 
 
-    <script src='/js/app/core/post/post.module.js' ></script>
-    <script src='/js/app/core/post/post.service.js' ></script>
+    <script src='{% static "js/app/core/post/post.module.js" %}' ></script>
+    <script src='{% static "js/app/core/post/post.service.js" %}' ></script>
 
-    <script src='/js/app/blog-detail/blog-detail.module.js' ></script>
-    <script src='/js/app/blog-detail/blog-detail.component.js' ></script>
-    <script src='/js/app/blog-list/blog-list.module.js' ></script>
-    <script src='/js/app/blog-list/blog-list.component.js' ></script>
+    <script src='{% static "js/app/blog-detail/blog-detail.module.js" %}' ></script>
+    <script src='{% static "js/app/blog-detail/blog-detail.component.js" %}' ></script>
+    <script src='{% static "js/app/blog-list/blog-list.module.js" %}' ></script>
+    <script src='{% static "js/app/blog-list/blog-list.component.js" %}' ></script>
     
 
-    <script src='/js/app/utils/confirm-click/confirm-click.module.js' ></script>
-    <script src='/js/app/utils/confirm-click/confirm-click.directive.js' ></script>
+    <script src='{% static "js/app/utils/confirm-click/confirm-click.module.js" %}' ></script>
+    <script src='{% static "js/app/utils/confirm-click/confirm-click.directive.js" %}' ></script>
 
-    <script src='/js/app/utils/try-nav/try-nav.module.js' ></script>
-    <script src='/js/app/utils/try-nav/try-nav.directive.js' ></script>
+    <script src='{% static "js/app/utils/try-nav/try-nav.module.js" %}' ></script>
+    <script src='{% static "js/app/utils/try-nav/try-nav.directive.js" %}' ></script>
 
 
     <style>
