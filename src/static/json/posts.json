@@ -1,0 +1,34 @@
+[
+    {"title": "New Item", "id": 1, "description": "This is a book", "publishDate": "2016-09-11", 
+                    "comments": [
+                        {"id": 1, "text": "Nice book"}, 
+                        {"id": 2, "text":"Another comment" }
+                    ],
+    "image": "http://www.gentlemenglobal.com/wp-content/plugins/RSSPoster_PRO/cache/c01dd_9b47882abe5107fb7491a507e1888767.jpg"
+    },
+    {"title": "Title", "id": 2, "description": "This is a book", "publishDate": "2015-09-11", "image": "http://www.gentlemenglobal.com/wp-content/plugins/RSSPoster_PRO/cache/c01dd_9b47882abe5107fb7491a507e1888767.jpg"},
+    {"title": "Tea", "id": 3, "description": "This is a book", "publishDate": "2015-02-11", "image": "/img/1.jpg"},
+    {"title": "Lite", "id": 4, "description": "This is a book", "publishDate": "2015-12-11", "image": "/img/1.jpg"},
+       {"title": "Tea", "id": 3, "description": "This is a book", "publishDate": "2015-02-11", "image": "/img/1.jpg"},
+    {"title": "Lite", "id": 4, "description": "This is a book", "publishDate": "2015-12-11", "image": "/img/1.jpg"},
+ 
+    {"title": "Tea", "id": 3, "description": "This is a book", "publishDate": "2015-02-11", "image": "/img/1.jpg"},
+    {"title": "Lite", "id": 4, "description": "This is a book", "publishDate": "2015-12-11", "image": "/img/1.jpg"},
+ 
+    {"title": "Tea", "id": 3, "description": "This is a book", "publishDate": "2015-02-11", "image": "/img/1.jpg"},
+    {"title": "Lite", "id": 4, "description": "This is a book", "publishDate": "2015-12-11", "image": "/img/1.jpg"},
+ 
+    {"title": "Tea", "id": 3, "description": "This is a book", "publishDate": "2015-02-11", "image": "/img/1.jpg"},
+    {"title": "Lite", "id": 4, "description": "This is a book", "publishDate": "2015-12-11", "image": "/img/1.jpg"},
+ 
+    {"title": "Tea", "id": 3, "description": "This is a book", "publishDate": "2015-02-11", "image": "/img/1.jpg"},
+    {"title": "Lite", "id": 4, "description": "This is a book", "publishDate": "2015-12-11", "image": "/img/1.jpg"},
+ 
+    {"title": "Tea", "id": 3, "description": "This is a book", "publishDate": "2015-02-11", "image": "/img/1.jpg"},
+    {"title": "Lite", "id": 4, "description": "This is a book", "publishDate": "2015-12-11", "image": "/img/1.jpg"},
+ 
+    {"title": "Tea", "id": 3, "description": "This is a book", "publishDate": "2015-02-11", "image": "/img/1.jpg"},
+    {"title": "Lite", "id": 4, "description": "This is a book", "publishDate": "2015-12-11", "image": "/img/1.jpg"}
+
+ 
+]
