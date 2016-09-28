@@ -11,7 +11,7 @@ angular.
                     isArray: true,
                     cache: false,
                     transformResponse: function(data, headersGetter, status){
-                        console.log(data)
+                        // console.log(data)
                         var finalData = angular.fromJson(data)
                         return finalData.results
                     }

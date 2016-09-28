@@ -28,6 +28,10 @@ angular.module('try').
               when("/blog/:slug", {
                   template: "<blog-detail></blog-detail>"
               }).
+              when("/login", {
+                  template: "<login-detail></login-detail>",
+                  // redirectTo: '/'
+              }).
               // when("/blog/:id/:abc", {
               //     template: "<blog-list></blog-list>"
               // }).
