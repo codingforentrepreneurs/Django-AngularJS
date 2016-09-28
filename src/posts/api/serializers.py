@@ -71,6 +71,7 @@ class PostDetailSerializer(ModelSerializer):
 class PostListSerializer(ModelSerializer):
     url = post_detail_url
     user = UserDetailSerializer(read_only=True)
+    image = SerializerMethodField()
     class Meta:
         model = Post
         fields = [
@@ -79,8 +80,16 @@ class PostListSerializer(ModelSerializer):
             'title',
             'content',
             'publish',
+            'slug',
+            'image',
         ]
 
+    def get_image(self, obj):
+        try:
+            image = obj.image.url
+        except:
+            image = None
+        return image
 
 
 
