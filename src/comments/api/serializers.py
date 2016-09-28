@@ -1,6 +1,7 @@
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
 
+from rest_framework import serializers
 from rest_framework.serializers import (
     HyperlinkedIdentityField,
     ModelSerializer,
@@ -13,6 +14,58 @@ from accounts.api.serializers import UserDetailSerializer
 from comments.models import Comment
 
 User = get_user_model()
+
+
+class CommentCreateSerializer(ModelSerializer):
+        type = serializers.CharField(required=False, write_only=True) # Post
+        slug = serializers.SlugField(write_only=True) # new-title
+        parent_id = serializers.IntegerField(required=False)
+
+        class Meta:
+            model = Comment
+            fields = [
+                'id',
+                'content',
+                'type',
+                'slug',
+                'parent_id',
+                'timestamp',
+            ]
+
+
+        def validate(self, data):
+            model_type      = data.get("type", "post")
+            model_qs        = ContentType.objects.filter(model=model_type)
+            if not model_qs.exists() or model_qs.count() != 1:
+                raise ValidationError("This is not a valid content type")
+            SomeModel       = model_qs.first().model_class()
+            slug            = data.get("slug")
+            obj_qs          = SomeModel.objects.filter(slug=slug)
+            if not obj_qs.exists() or obj_qs.count() != 1:
+                raise ValidationError("This is not a slug for this content type")
+            parent_id       = data.get("parent_id")
+            if parent_id:
+                parent_qs   = Comment.objects.filter(id=parent_id)
+                if not parent_qs.exists() or parent_qs.count() !=1:
+                    raise ValidationError("This is not a valid parent for this content")
+            return data
+
+        def create(self, validated_data):
+            content         = validated_data.get("content")
+            model_type      = validated_data.get("type", "post")
+            slug            = validated_data.get("slug")
+            parent_obj      = None
+            parent_id       = validated_data.get("parent_id")
+            if parent_id:
+                parent_obj  = Comment.objects.filter(id=parent_id).first()
+            user            = self.context['user']
+            comment         = Comment.objects.create_by_model_type(
+                                model_type, slug, content, user,
+                                parent_obj=parent_obj,
+                    )
+            return comment
+
+
 
 def create_comment_serializer(model_type='post', slug=None, parent_id=None, user=None):
     class CommentCreateSerializer(ModelSerializer):
