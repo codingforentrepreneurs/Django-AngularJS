@@ -3,10 +3,10 @@
 angular.module('blogList').
     component('blogList', {
         templateUrl: '/api/templates/blog-list.html',
-        controller: function(Post, $location, $routeParams, $rootScope, $scope){
+        controller: function(Post, $cookies, $location, $routeParams, $rootScope, $scope){
             // console.log($location.search())
             var q = $location.search().q
-            console.log(q)
+            // console.log(q)
             if (q) {
                 $scope.query = q
                 $scope.didPerformSearch = true;

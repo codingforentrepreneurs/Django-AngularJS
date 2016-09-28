@@ -2,7 +2,7 @@
 
 
 angular.module("tryNav").
-  directive('tryNav', function(Post, $location){
+  directive('tryNav', function(Post, $cookies, $location){
     return {    
         restrict: "E",
         templateUrl: "/api/templates/try-nav.html",
@@ -20,6 +20,18 @@ angular.module("tryNav").
                 $location.path("/blog/").search("q", scope.searchQuery)
                 scope.searchQuery = ""
             }
+
+            scope.userLoggedIn = false
+            scope.$watch(function(){
+                var token = $cookies.get("token")
+                if (token) {
+                    scope.userLoggedIn = true
+                } else {
+                    scope.userLoggedIn = false
+                }
+            })
+            
+
         }
     }
 });
