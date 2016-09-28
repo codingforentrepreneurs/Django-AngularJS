@@ -37,13 +37,13 @@
       <div class="thumbnail">
 
 
-        <a ng-href='/blog/{{ post.id }}' ng-if='post.image'>
+        <a ng-href='/blog/{{ post.slug }}' ng-if='post.image'>
           <img ng-src='{{ post.image }}' class='img-responsive'>
         </a>
         <div class="caption">
-          <h3><a ng-href='/blog/{{ post.id }}'>{{ post.title }}</a></h3>
+          <h3><a ng-href='/blog/{{ post.slug }}'>{{ post.title }}</a></h3>
           <p>{{ post.text }} {{ post.publishDate }}</p>
-          <p><a ng-href='/blog/{{ post.id }}' class='btn btn-primary'>View</a></p>
+          <p><a ng-href='/blog/{{ post.slug }}' class='btn btn-primary'>View</a></p>
           <!-- <p><a ng-href='#' class='btn btn-primary' confirm-click='Are you ready?' confirmed-click='goToItem(post)'/>View</a></p> -->
         </div>
       </div>
