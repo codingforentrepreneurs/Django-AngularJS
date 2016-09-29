@@ -25,15 +25,10 @@ angular.
                     cache: false,
                 }
 
-            // var commentCreate = {
-            //     url: url + "create/",
-            //     method: "post",
-            // }
 
             return $resource(url, {}, {
                 query: commentQuery,
                 get: commentGet,
-                // create: commentCreate,
             })
 
         });
