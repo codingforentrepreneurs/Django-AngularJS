@@ -43,3 +43,11 @@ Team CFE
 [14 - Create Comment in Backend with $http](../../tree/ed3326c8dac9647592f6256b66a51ed8dc045300)
 
 [15 - Comment Create API Endpoint & Serializer Context](../../tree/adeafebb56738c3ee49462760b4ada2a0e03ab5b)
+
+[16 - Comment List API View](../../tree/cdbe0237cd4dc88dbf0a5f6aedeb83f70490d660)
+
+[17 - Comment ngResource](../../tree/923a687695ef30971f1bae3abb6c2f9ecd0ced07)
+
+[18 - ngResource Create & Delete](../../tree/18b1e16f999161bb23f29aab9c628a0bbfbe13b2)
+
+
