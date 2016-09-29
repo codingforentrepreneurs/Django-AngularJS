@@ -1,3 +1,4 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db.models import Q
 from rest_framework.filters import (
         SearchFilter,
@@ -91,8 +92,22 @@ class CommentListAPIView(ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
         #queryset_list = super(PostListAPIView, self).get_queryset(*args, **kwargs)
-        queryset_list = Comment.objects.filter(id__gte=0) #filter(user=self.request.user)
+        queryset_list = []
         query = self.request.GET.get("q")
+        slug = self.request.GET.get("slug") # content we commented on
+        type = self.request.GET.get("type", "post") # content type
+        if slug:
+            model_type      = type
+            model_qs        = ContentType.objects.filter(model=model_type)
+            if model_qs.exists():  
+                SomeModel       = model_qs.first().model_class()
+                obj_qs          = SomeModel.objects.filter(slug=slug) #Post.objects.filter(slug=slug)
+                if obj_qs.exists():
+                    content_obj     = obj_qs.first()
+                    queryset_list   = Comment.objects.filter_by_instance(content_obj)
+        else:
+            queryset_list = Comment.objects.filter(id__gte=0) #filter(user=self.request.user)
+
         if query:
             queryset_list = queryset_list.filter(
                     Q(content__icontains=query)|
