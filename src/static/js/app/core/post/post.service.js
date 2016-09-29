@@ -1,7 +1,7 @@
 'use strict';
 
 angular.
-    module('post').
+    module('core.post').
         factory('Post', function($resource){
             var url = '/api/posts/:slug/'
             return $resource(url, {}, {

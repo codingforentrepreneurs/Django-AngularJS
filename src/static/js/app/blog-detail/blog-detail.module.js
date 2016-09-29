@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('blogDetail', ["post"]);
+angular.module('blogDetail', ["core.comment", "core.post"]);
