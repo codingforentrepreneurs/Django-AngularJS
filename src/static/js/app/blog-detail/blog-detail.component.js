@@ -4,84 +4,64 @@ angular.module('blogDetail').
     component('blogDetail', {
         templateUrl: '/api/templates/blog-detail.html',
         controller: function(Comment, Post, $cookies, $http, $location, $routeParams, $scope){
-            
             var slug = $routeParams.slug
             Post.get({"slug": slug}, function(data){
                 $scope.post = data
                 // $scope.comments = data.comments
                 Comment.query({"slug": slug, "type": "post"}, function(data){
+                    console.log(data)
                     $scope.comments = data
                 })
             })
             
-            // Post.query(function(data){
-            //   $scope.notFound = true
-              
-            //   $scope.comments = []
-            //    angular.forEach(data, function(post){
-            //         if (post.id == $routeParams.id){
-            //           $scope.notFound = false
-            //           $scope.post = post
-            //           if (post.comments) {
-            //             $scope.comments = post.comments
-    
-            //           }
-            //           resetReply()
-            //         }
-            //   })
-            // })
-
-
 
             $scope.deleteComment = function(comment) {
-                $scope.$apply(
+                comment.$delete({"id": comment.id}, function(data){
                     $scope.comments.splice(comment, 1)
-                )
-                // someResource.$delete()
+                }, function(e_data){
+                    console.log(e_data)
+                })
+                // Comment.delete()
+                // $create
+                // $save
+
             }
 
-// "Authorization: JWT " '{"content":"some reply to another try"}' ''
+            $scope.updateReply = function(comment) {
+                Comment.update({
+                    "id": comment.id,
+                    content: $scope.reply.content,
+                    slug: slug,
+                    type: "post",
+                }, function(data){
+                    // console.log(data)
+                    // $scope.comments.push(data)
+                    // resetReply()
+                }, function(e_data){
+                    console.log(e_data)
+                })
+                
+            }
 
 
             $scope.addReply = function() {
-                console.log($scope.reply)
-                var token = $cookies.get("token")
-                if (token){
-                    var req = {
-                        method: "POST",
-                        url: 'http://127.0.0.1:8000/api/comments/create/',
-                        data: {
-                            content: $scope.reply.content,
-                            slug: slug,
-                            type: "post",
-                        },
-                        headers: {
-                            authorization: "JWT " + token
-                        }
-                    }
-
-                    var requestAction = $http(req)
-
-                    requestAction.success(function(r_data, r_status, r_headers, r_config){
-                         $scope.comments.push($scope.reply)
-                         resetReply()
-                    })
-                    requestAction.error(function(e_data,e_status, e_headers, e_config){
-                        console.log(e_data)
-                    })
-
-                    // $scope.post.comments.push("abc")
-                    
-
-                } else {
-                    console.log("no token")
-                }
+                Comment.create({
+                    content: $scope.reply.content,
+                    slug: slug,
+                    type: "post",
+                }, function(data){
+                    // console.log(data)
+                    $scope.comments.push(data)
+                    resetReply()
+                }, function(e_data){
+                    console.log(e_data)
+                })
                 
             }
 
             function resetReply(){
               $scope.reply = {
-                          id: $scope.comments.length + 1,
+                          // id: $scope.comments.length + 1,
                           content: "",
               }
             }

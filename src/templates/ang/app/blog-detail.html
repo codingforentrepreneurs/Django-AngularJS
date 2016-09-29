@@ -27,7 +27,6 @@
             <div class='col-sm-6'>
                 <p style='color:red;' ng-if='reply.content'>Preview: {{ reply.content }}</p>
                 <form ng-submit='addReply()'>
-                    <input type='hidden' ng-model='reply.id'>
                     <textarea class='form-control'  ng-model='reply.content'></textarea>
                     <input class='btn btn-default' type='submit'/>
                 </form>
