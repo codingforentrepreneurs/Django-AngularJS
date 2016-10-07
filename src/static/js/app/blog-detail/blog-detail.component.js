@@ -43,23 +43,7 @@ angular.module('blogDetail').
                 
             }
 
-            $scope.addCommentReply = function(reply, parentComment) {
-                Comment.create({
-                    content: reply.content,
-                    slug: slug,
-                    type: "post",
-                    parent_id: parentComment.id,
-                }, function(data){
-                    // console.log(data)
-                    // $scope.comments.push(data)
-                    parentComment.reply_count += 1
-                    // resetNewComment()
-                    reply.content = ""
-                }, function(e_data){
-                    console.log(e_data)
-                })
 
-            }
 
             $scope.addNewComment = function() {
                 // console.log($scope.reply)
@@ -68,8 +52,11 @@ angular.module('blogDetail').
                     slug: slug,
                     type: "post",
                 }, function(data){
-                    // console.log(data)
+                    console.log(data)
+                    // data['reply_count'] = 0
+                    data.reply_count = 0
                     $scope.comments.push(data)
+
                     resetNewComment()
                 }, function(e_data){
                     console.log(e_data)

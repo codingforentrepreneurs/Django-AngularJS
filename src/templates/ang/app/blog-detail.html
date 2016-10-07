@@ -21,11 +21,7 @@
             {{ comment.content }}<br/> <small><a href='#' ng-click='isShowReplies = !isShowReplies'><span ng-show='!isShowReplies'>Reply/View</span><span ng-show='isShowReplies'>Hide</span>: {{ comment.reply_count }}<a/>  | <a href='#' class='' confirm-click='Do you want to delete this?' confirmed-click='deleteComment(comment)'>Remove</a></small>
             <br/>
             <div class='col-sm-6' ng-show='isShowReplies'>
-                <p style='color:red;' ng-if='reply.content'>Preview: {{ reply.content }}</p>
-                <form ng-submit='addCommentReply(reply, comment)'>
-                    <textarea class='form-control'  ng-model='reply.content'></textarea>
-                    <input class='btn btn-default btn-sm' type='submit' value='Reply'/>
-                </form>
+                <comment-reply-thread comment='comment' slug='post.slug'></comment-reply-thread>
             </div>
             <div class='clearfix'></div>
             <br/>
