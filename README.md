@@ -50,4 +50,9 @@ Team CFE
 
 [18 - ngResource Create & Delete](../../tree/18b1e16f999161bb23f29aab9c628a0bbfbe13b2)
 
+[19 - Reply to Comments](../../tree/7f2e668bcacfb3c9eb8ef3b2f893081f6680ee88)
 
+[20 - Toggle View of Content](../../tree/7fac2a7456d0a22492e5a463e020258282deee54)
+
+
+[21 & 22 - Comment Reply Directive Part 1 & 2](../../tree/a0c37c7b0926e4c65a7e55f2a7c6f823a2a45bc9)
