@@ -9,36 +9,51 @@
 
 <p> {{ post.description }}</p>
 
-<hr/>
-<h3>Comments</h3>
+
+
 <div class='row' ng-show='comments.length > 0'>
     <div class='col-sm-6'>
-        <input class='form-control' type='text' ng-model='query' placeholder='Filter Comments' /> <br/>
+        <h3>Comments</h3>
+    </div>
+    <div class='col-sm-6'>
+        <input style='margin-top: 18px;' class='form-control' type='text' ng-model='query' placeholder='Filter Comments' /> <br/>
+    </div>
+    <div class='col-sm-12'>
+        <hr/>
     </div>
 </div>
-<ul ng-show='comments.length > 0'>
-    <li ng-repeat='comment in comments | filter: query'>
+<div class='row'>
+        <div class='col-sm-6'>
+            <form ng-submit='addNewComment()'>
+                <textarea class='form-control'  ng-model='newComment.content'></textarea>
+                <input class='btn btn-default' type='submit' value='Add Comment'/>
+            </form>
+        </div>
+        <div class='col-sm-6' ng-if='newComment.content'> 
+         <p style='color:red;' >Preview:</p>
+         <p>{{ newComment.content }}</p>
+         
+    </div>
+        <div class='col-sm-12'>
+        <hr/>
+    </div>
+
+</div>
+        <br/>
+<div class='row'>
+    <div class='col-sm-12' ng-repeat='comment in comments | orderBy: commentOrder | filter: query'>
             {{ comment.content }}<br/> <small><a href='#' ng-click='isShowReplies = !isShowReplies'><span ng-show='!isShowReplies'>Reply/View</span><span ng-show='isShowReplies'>Hide</span>: {{ comment.reply_count }}<a/>  | <a href='#' class='' confirm-click='Do you want to delete this?' confirmed-click='deleteComment(comment)'>Remove</a></small>
             <br/>
             <div class='col-sm-6' ng-show='isShowReplies'>
                 <comment-reply-thread comment='comment' slug='post.slug'></comment-reply-thread>
             </div>
             <div class='clearfix'></div>
-            <br/>
-            <br/>
-    </li>
-</ul>
+            <hr/>
+    </div>
+    
+</div>
 
-<hr/>
-        <div class='row'>
-            <div class='col-sm-6'>
-                <p style='color:red;' ng-if='newComment.content'>Preview: {{ newComment.content }}</p>
-                <form ng-submit='addNewComment()'>
-                    <textarea class='form-control'  ng-model='newComment.content'></textarea>
-                    <input class='btn btn-default' type='submit' value='Add Comment'/>
-                </form>
-            </div>
-        </div>
+     
 
     </div>
 </div>

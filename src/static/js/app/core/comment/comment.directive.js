@@ -8,16 +8,24 @@ angular.module('core.comment').
                 comment: '=comment',
                 slug: '=slug'
             },
-            template: "<ul ng-show='replies'><li ng-repeat='reply in replies'>{{ reply.content }}</li></ul>" + 
-            "<div class='text-center' ng-show='!replies'>" +
-                "<img style='margin: 0 auto;' ng-src='/static/img/ring.gif' class='img-responsive'/>" + 
-            "</div>" + 
-            "<p style='color:red;' ng-if='reply.content'>Preview: {{ reply.content }}</p>" + 
-            "<form ng-submit='addCommentReply(reply, comment)'>" +
-                "<textarea class='form-control'  ng-model='reply.content'></textarea>" + 
-               " <input class='btn btn-default btn-sm' type='submit' value='Reply'/>" + 
-            "</form>",
+            template:"<div class='row' ng-repeat='r in replies' style='margin-top:10px;'><div class='col-sm-12'>" +
+                         "<div class=\"panel panel-default\"> " +
+                                "<div class=\"panel-body \">" + 
+                                    "{{ r.content }} <br/>" +  
+                                    "via {{ user }} | <a href='#'>Remove</a>" +
+                                "</div>" +    
+                            "</div>" + 
+                        "</div></div>" + 
+                        "<div class='text-center' ng-show='!replies'>" +
+                            "<img style='margin: 0 auto;' ng-src='/static/img/ring.gif' class='img-responsive'/>" + 
+                        "</div>" + 
+                        "<p style='color:red;' ng-if='reply.content'>Preview: {{ reply.content }}</p>" + 
+                        "<form ng-submit='addCommentReply(reply, comment)'>" +
+                            "<textarea class='form-control'  ng-model='reply.content' placeholder='Write reply'></textarea>" + 
+                           " <input class='btn btn-default btn-sm' type='submit' value='Reply'/>" + 
+                        "</form>" ,
             link: function(scope, element, attr) {
+                scope.user = 'jmitchel3'
                 if (scope.comment) {
                     var commentId = scope.comment.id
                     if (commentId){
