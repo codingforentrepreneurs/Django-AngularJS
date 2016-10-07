@@ -51,7 +51,7 @@ angular.
             if (token){
                 commentCreate["headers"] = {"Authorization": "JWT " + token}
                 commentDelete["headers"] = {"Authorization": "JWT " + token}
-                commentUpdate{"headers"} = {"Authorization": "JWT " + token}
+                commentUpdate["headers"] = {"Authorization": "JWT " + token}
             }
 
             return $resource(url, {}, {
