@@ -2,7 +2,7 @@
 
 angular.
     module('core.comment').
-        factory('Comment', function($cookies, $resource){
+        factory('Comment', function($cookies, $httpParamSerializer, $location, $resource){
             var url = '/api/comments/:id/'
             var commentQuery = {
                 url: url,
@@ -27,6 +27,19 @@ angular.
              var commentCreate = {
                     url: '/api/comments/create/',
                     method: "POST",
+                    interceptor: {responseError: function(response){
+                        //console.log("interceptor error")
+                        //console.log(response)
+                        if (response.status == 401){
+                            var currentPath = $location.path();
+                            console.log(currentPath)
+                            if (currentPath == "/login") {
+                                $location.path("/login")
+                            } else {
+                                $location.path("/login").search("next", currentPath)
+                            }
+                        }
+                    }}
                     // params: {"id": "@id"},
                     // isArray: false,
                     // cache: false,
