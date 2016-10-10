@@ -25,8 +25,18 @@
 <div class='row'>
         <div class='col-sm-6'>
             <form ng-submit='addNewComment()'>
-                <textarea class='form-control'  ng-model='newComment.content'></textarea>
-                <input class='btn btn-default' type='submit' value='Add Comment'/>
+                
+               
+                <div class="form-group" ng-class="{'has-error': commentError.content }">
+                    <textarea class='form-control' id='contentText' placeholder='New comment' ng-model='newComment.content'></textarea>
+
+                  <label class="control-label" for="contentText" ng-if='commentError.content'><span ng-repeat='error in commentError.content'>{{ error }}<br/></span></label>
+                  
+
+                </div>
+                 <input class='btn btn-default' type='submit' value='Add Comment'/>
+
+
             </form>
         </div>
         <div class='col-sm-6' ng-if='newComment.content'> 

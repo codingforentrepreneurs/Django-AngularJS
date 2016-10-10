@@ -58,7 +58,7 @@ angular.module('blogDetail').
                     // data['reply_count'] = 0
                     data.reply_count = 0
                     $scope.comments.push(data)
-
+                     $scope.commentError = ''
                     resetNewComment()
                 }, function(e_data){
                     // console.log(e_data)
