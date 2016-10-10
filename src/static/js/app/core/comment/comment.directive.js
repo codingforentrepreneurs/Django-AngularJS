@@ -40,26 +40,38 @@ angular.module('core.comment').
                     }
                 }
                 scope.reply = {}
+                scope.replyError = {}
+                scope.$watch(function(){
+                    if (scope.reply.content) {
+                        scope.replyError = {}
+                    }
+                })
+
                 scope.addCommentReply = function(reply, parentComment) {
-                    Comment.create({
-                        content: reply.content,
-                        slug: scope.slug,
-                        type: "post",
-                        parent_id: parentComment.id,
-                    }, function(data) {
-                        if (parentComment.reply_count) {
-                            parentComment.reply_count += 1
-                        } else {
-                            parentComment.reply_count = 1
-                        }
-                        
-                        scope.replies.push(data)
-                        scope.replyError = ""
-                        reply.content = ""
-                    }, function(e_data){
-                        console.log(e_data)
-                        scope.replyError = e_data.data
-                    })
+                    if (!reply.content) {
+                         scope.replyError.content = ['This field is required']
+                    } else {
+                            Comment.create({
+                            content: reply.content,
+                            slug: scope.slug,
+                            type: "post",
+                            parent_id: parentComment.id,
+                        }, function(data) {
+                            if (parentComment.reply_count) {
+                                parentComment.reply_count += 1
+                            } else {
+                                parentComment.reply_count = 1
+                            }
+                            
+                            scope.replies.push(data)
+                            scope.replyError = ""
+                            reply.content = ""
+                        }, function(e_data){
+                            console.log(e_data)
+                            scope.replyError = e_data.data
+                        })
+                    }
+                    
 
                 }
 

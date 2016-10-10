@@ -45,25 +45,38 @@ angular.module('blogDetail').
 
 
             $scope.commentOrder = '-timestamp'
-            $scope.newComment = {}
 
+            $scope.$watch(function(){
+                if ($scope.newComment.content){
+                    $scope.commentError = {}
+                }
+            })
+            
+            $scope.newComment = {}
+            $scope.commentError = {}
             $scope.addNewComment = function() {
                 // console.log($scope.reply)
-                Comment.create({
-                    content: $scope.newComment.content,
-                    slug: slug,
-                    type: "post",
-                }, function(data){
-                    console.log(data)
-                    // data['reply_count'] = 0
-                    data.reply_count = 0
-                    $scope.comments.push(data)
-                     $scope.commentError = ''
-                    resetNewComment()
-                }, function(e_data){
-                    // console.log(e_data)
-                    $scope.commentError = e_data.data
-                })
+                if (!$scope.newComment.content) {
+                    $scope.commentError.content = ["This field is required."]
+                } else {
+
+
+                    Comment.create({
+                        content: $scope.newComment.content,
+                        slug: slug,
+                        type: "post",
+                    }, function(data){
+                        console.log(data)
+                        // data['reply_count'] = 0
+                        data.reply_count = 0
+                        $scope.comments.push(data)
+                         $scope.commentError = ''
+                        resetNewComment()
+                    }, function(e_data){
+                        // console.log(e_data)
+                        $scope.commentError = e_data.data
+                    })
+                 }
                 
             }
 
