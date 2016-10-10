@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('core.comment', []);
+angular.module('core.comment', ['core.interceptors']);

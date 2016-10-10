@@ -24,6 +24,7 @@ angular.module('loginDetail').
                 $scope.user = {
                     username: $cookies.get("username")
                 }
+                window.location.reload()
             }
 
             $scope.doLogin = function(user){
@@ -46,6 +47,7 @@ angular.module('loginDetail').
                         $cookies.put("username", user.username)
                         // message
                         $location.path("/")
+                        window.location.reload()
                 })
                 requestAction.error(function(e_data, e_status, e_headers, e_config){
                         // console.log(e_data) // error
