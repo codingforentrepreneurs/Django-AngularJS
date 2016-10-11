@@ -40,8 +40,10 @@
         </a>
         <div class="caption">
           <h3><a ng-href='/blog/{{ post.slug }}'>{{ post.title }}</a> <br/><small> {{ post.publish }}</h3>
-          <p>{{ post.content|limitTo:220 }}<span ng-if='post.content.length >= 220'>...</span></p>
+          <!-- <p>{{ post.content|limitTo:220 }}<span ng-if='post.content.length >= 220'>...</span></p> -->
+          <p markdown-to-html='post.content|limitTo:220'></p>
           <p><a ng-href='/blog/{{ post.slug }}' class='btn btn-primary'>View</a></p>
+          <!-- <p><a ng-href='/blog/{{ post.slug }}' class='btn btn-primary'><span ng-if='post.content.length >= 20'>Keep reading</span><span ng-if='post.content.length < 20'>View</span></a></p> -->
           <!-- <p><a ng-href='#' class='btn btn-primary' confirm-click='Are you ready?' confirmed-click='goToItem(post)'/>View</a></p> -->
         </div>
       </div>

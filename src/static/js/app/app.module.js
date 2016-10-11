@@ -6,6 +6,8 @@ angular.module('try', [
     'ngCookies',
     'ngResource',
     'ngRoute',
+    'ngSanitize',
+    'ng-showdown',
     'ui.bootstrap',
     // internal
     'blogDetail',

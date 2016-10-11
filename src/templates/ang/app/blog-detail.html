@@ -7,8 +7,8 @@
 <img ng-src='{{ post.image }}' class='img-responsive'> <br/>
 </span>
 
-<p>{{ post.content }}</p>
-
+<p markdown-to-html='post.content'>{{ post.content }}</p>
+<hr/>
 
 
 <div class='row' ng-show='comments.length > 0'>
