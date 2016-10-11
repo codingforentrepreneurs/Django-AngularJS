@@ -13,6 +13,12 @@ from rest_framework.serializers import (
     )
 
 
+from rest_framework_jwt.settings import api_settings
+
+jwt_payload_handler = api_settings.JWT_PAYLOAD_HANDLER
+jwt_encode_handler = api_settings.JWT_ENCODE_HANDLER
+
+
 User = get_user_model()
 
 
@@ -89,15 +95,20 @@ class UserCreateSerializer(ModelSerializer):
 
 
 
+
+
+
+
+
 class UserLoginSerializer(ModelSerializer):
     token = CharField(allow_blank=True, read_only=True)
     username = CharField()
-    email = EmailField(label='Email Address')
+    #email = EmailField(label='Email Address')
     class Meta:
         model = User
         fields = [
             'username',
-            'email',
+            #'email',
             'password',
             'token',
             
@@ -106,10 +117,29 @@ class UserLoginSerializer(ModelSerializer):
                             {"write_only": True}
                             }
     def validate(self, data):
-        # email = data['email']
-        # user_qs = User.objects.filter(email=email)
-        # if user_qs.exists():
-        #     raise ValidationError("This user has already registered.")
-        return data
+        username = data['username']
+        password = data['password']
+        user_a = User.objects.filter(username__icontains=username)
+        user_b = User.objects.filter(email__icontains=username)
+        user_qs = (user_a | user_b).distinct()
+        if user_qs.exists() and user_qs.count() == 1:
+            user_obj = user_qs.first() # User.objects.get(id=1)
+            password_passes = user_obj.check_password(password)
+            # HTTPS 
+            if password_passes:
+                # token
+                data['username'] = user_obj.username
+                #data['email'] = user_obj.email
+                payload = jwt_payload_handler(user_obj)
+                token = jwt_encode_handler(payload)
+                data['token'] = token
+                return data
+        raise ValidationError("Invalid credentials")
+
+        # # email = data['email']
+        # # user_qs = User.objects.filter(email=email)
+        # # if user_qs.exists():
+        # #     raise ValidationError("This user has already registered.")
+        # return data
 
 
