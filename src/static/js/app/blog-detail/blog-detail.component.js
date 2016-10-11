@@ -2,18 +2,52 @@
 
 angular.module('blogDetail').
     component('blogDetail', {
-        templateUrl: '/api/templates/blog-detail.html',
+        // templateUrl: '/api/templates/blog-detail.html',
+        template: "<ng-include src='getTemplateUrl()' />",
         controller: function(Comment, Post, $cookies, $http, $location, $routeParams, $scope){
-            var slug = $routeParams.slug
-            Post.get({"slug": slug}, function(data){
+            $scope.loading = true;
+            $scope.post = null;
+            $scope.pageError = false;
+            $scope.notFound = false;
+
+            $scope.getTemplateUrl = function(){
+                if ($scope.loading && $scope.post == null) {
+                    return '/api/templates/loading/loading-detail.html'
+                } else if ($scope.notFound) {
+                     return '/api/templates/error/404.html'
+                } else if ($scope.pageError) {
+                    return '/api/templates/error/500.html'
+                }else {
+                    return '/api/templates/blog-detail.html'
+                }
+            }
+
+
+
+
+
+            function postDataSuccess(data){
+                $scope.loading = false;
                 $scope.post = data
                 // $scope.comments = data.comments
                 Comment.query({"slug": slug, "type": "post"}, function(data){
-                    console.log(data)
+                    // console.log(data)
                     $scope.comments = data
                 })
-            })
-            
+            }
+
+            function postDataError(e_data){
+                $scope.loading = false;
+                if (e_data.status == 404) {
+                     $scope.notFound = true;
+                } else {
+                    // status code 500
+                    $scope.pageError = true;
+                }
+            }
+
+            var slug = $routeParams.slug
+            Post.get({"slug": slug}, postDataSuccess, postDataError)
 
             $scope.deleteComment = function(comment) {
                 comment.$delete({"id": comment.id}, function(data){
