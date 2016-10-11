@@ -11,7 +11,7 @@ angular.module('loginDetail').
                 $rootScope, 
                 $scope
             ){
-            var loginUrl = '/api/auth/token/'
+            var loginUrl = '/api/users/login/'
             $scope.loginError = {}
             $scope.user = {
 
