@@ -9,8 +9,8 @@
 </div>
 <div class='col-sm-6'>
    <select class='form-control' ng-model='order'>
-      <option value='-publishDate'>Recent</option>
-      <option value='publishDate'>Older</option>
+      <option value='-publish'>Recent</option>
+      <option value='publish'>Older</option>
       <option value='title'>A-Z</option>
       <option value='-title'>Z-A</option>
 
@@ -39,8 +39,8 @@
           <img ng-src='{{ post.image }}' class='img-responsive'>
         </a>
         <div class="caption">
-          <h3><a ng-href='/blog/{{ post.slug }}'>{{ post.title }}</a></h3>
-          <p>{{ post.text }} {{ post.publishDate }}</p>
+          <h3><a ng-href='/blog/{{ post.slug }}'>{{ post.title }}</a> <br/><small> {{ post.publish }}</h3>
+          <p>{{ post.content|limitTo:220 }}<span ng-if='post.content.length >= 220'>...</span></p>
           <p><a ng-href='/blog/{{ post.slug }}' class='btn btn-primary'>View</a></p>
           <!-- <p><a ng-href='#' class='btn btn-primary' confirm-click='Are you ready?' confirmed-click='goToItem(post)'/>View</a></p> -->
         </div>

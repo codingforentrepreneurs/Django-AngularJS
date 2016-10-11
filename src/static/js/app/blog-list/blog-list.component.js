@@ -12,7 +12,7 @@ angular.module('blogList').
                 $scope.didPerformSearch = true;
             }
 
-            $scope.order = '-publishDate'
+            $scope.order = '-publish'
             $scope.goToItem = function(post){
                 $rootScope.$apply(function(){
                     $location.path("/blog/" + post.id )
