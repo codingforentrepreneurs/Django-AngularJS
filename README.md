@@ -72,3 +72,13 @@ Team CFE
 [29 - Improve Blog Usability](../../tree/3934a014310cac657d8d02397dc81ef6e126c67f)
 
 [30 - Render Markdown in Angular](../../tree/e59567ea69c4759254efd41532326263a81354ad)
+
+[31 - User Login API Update in Django](../../tree/17a7c60a846f7ac292763877618e3c15e81a6e56)
+
+[32 - User Login API Update in AngularJS](../../tree/8eaa5493dd3c4b5ad75822df7dd7f47cf0291844)
+
+[33 - Registration API Update in Django](../../tree/af713591b8104cfd728f33a6c409cbd339a4fa30)
+
+[34 - Register Detail in AngularJS](../../tree/00f22fa8fa93c1aa67b4f7cc188e903ec90e7afb)
+
+
