@@ -14,5 +14,6 @@ angular.module('try', [
     'blogList',
     'confirmClick',
     'loginDetail',
+    'registerDetail',
     'tryNav',
 ]);

@@ -1,0 +1,39 @@
+<div class='col-sm-6 col-sm-offset-3'>
+    <h1>Register</h1>
+    <form ng-submit='doRegister(user)'>
+        <div class='alert alert-danger' ng-show='registerError.non_field_errors'>
+            <span ng-repeat='error in registerError.non_field_errors'>
+                {{ error }} <br/>
+            </span>
+        </div>
+        <div class="form-group" ng-class="{'has-error': registerError.username }">
+            <input type='text' ng-model='user.username' id='registerUsername' class='form-control' placeholder='Username/Email'>
+
+            <label class="control-label" for="registerUsername" ng-if='registerError.username'><span ng-repeat='error in registerError.username'>{{ error }}<br/></span></label>
+
+        </div>
+        <div class="form-group" ng-class="{'has-error': registerError.email }">
+            <input type='email' ng-model='user.email' id='registerUsername' class='form-control' placeholder='Email'>
+
+            <label class="control-label" for="registerUsername" ng-if='registerError.email'><span ng-repeat='error in registerError.email'>{{ error }}<br/></span></label>
+
+        </div>
+        <div class="form-group" ng-class="{'has-error': registerError.email2 }">
+            <input type='email' ng-model='user.email2' id='registerEmail2' class='form-control' placeholder='Confirm Email'>
+
+            <label class="control-label" for="registerEmail2" ng-if='registerError.email2'><span ng-repeat='error in registerError.email2'>{{ error }}<br/></span></label>
+
+        </div>
+
+
+            <div class="form-group" ng-class="{'has-error': registerError.password }">
+            <input type='password' ng-model='user.password' id='registerPassword' class='form-control'  placeholder='Password'>
+
+            <label class="control-label" for="registerPassword" ng-if='registerError.password'><span ng-repeat='error in registerError.password'>{{ error }}<br/></span></label>
+    
+
+        </div>
+    <input type='submit' value='Register' class='btn btn-primary' /><br/>
+    <p>Did you need to <a ng-href='/login'>Login</a>?</p>
+    </form>
+</div>

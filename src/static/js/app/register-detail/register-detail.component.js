@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('loginDetail').
-    component('loginDetail', {
-        templateUrl: '/api/templates/login-detail.html',
+angular.module('registerDetail').
+    component('registerDetail', {
+        templateUrl: '/api/templates/register-detail.html',
         controller: function(
                 $cookies, 
                 $http, 
@@ -11,47 +11,60 @@ angular.module('loginDetail').
                 $rootScope, 
                 $scope
             ){
-            var loginUrl = '/api/users/login/'
-            $scope.loginError = {}
+            var registerUrl = '/api/users/register/'
+            $scope.registerError = {}
             $scope.user = {
 
             }
 
             $scope.$watch(function(){
                 if ($scope.user.password) {
-                    $scope.loginError.password = ""
+                    $scope.registerError.password = ""
                 } else if ($scope.user.username) {
-                    $scope.loginError.username = ""
-                }
+                    $scope.registerError.username = ""
+                } else if ($scope.user.email) {
+                    $scope.registerError.email = ""
+                } else if ($scope.user.email2) {
+                    $scope.registerError.email2 = ""
+                } 
             })
 
             var tokenExists = $cookies.get("token")
             if (tokenExists) {
-                // verify token
-                $scope.loggedIn = true;
-                $cookies.remove("token")
-                $scope.user = {
-                    username: $cookies.get("username")
-                }
-                window.location.reload()
+                // warn user
+                
             }
 
-            $scope.doLogin = function(user){
+            $scope.doRegister = function(user){
                 // console.log(user)
                 if (!user.username) {
-                    $scope.loginError.username = ["This field may not be blank."]
+                    $scope.registerError.username = ["This field may not be blank."]
+                } 
+                if (!user.email) {
+                    $scope.registerError.email = ["This field may not be blank."]
                 } 
 
-                if (!user.password) {
-                    $scope.loginError.password = ["This field is required."]
+                if (!user.email2) {
+                    $scope.registerError.email2 = ["This field may not be blank."]
+                } 
+
+                if (user.email && user.email != user.email2) {
+                    $scope.registerError.email = ["Your emails must match."]
                 }
 
-                if (user.username && user.password) {
+
+                if (!user.password) {
+                    $scope.registerError.password = ["This field is required."]
+                }
+
+                if (user.username && user.email && user.email2 && user.password) {
                     var reqConfig = {
                         method: "POST",
-                        url: loginUrl,
+                        url: registerUrl,
                         data: {
                             username: user.username,
+                            email: user.email,
+                            email2: user.email2,
                             password: user.password
                         },
                             headers: {}
@@ -68,7 +81,7 @@ angular.module('loginDetail').
                     })
                     requestAction.error(function(e_data, e_status, e_headers, e_config){
                             // console.log(e_data) // error
-                            $scope.loginError = e_data
+                            $scope.registerError = e_data
 
                     })
                 }

@@ -36,6 +36,10 @@ angular.module('try').
                   // template: "<login-detail></login-detail>",
                   redirectTo: '/login'
               }).
+               when("/register", {
+                  template: "<register-detail></register-detail>",
+                  // redirectTo: '/'
+              }).
               // when("/blog/:id/:abc", {
               //     template: "<blog-list></blog-list>"
               // }).
