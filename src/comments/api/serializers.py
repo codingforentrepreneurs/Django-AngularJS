@@ -17,6 +17,7 @@ User = get_user_model()
 
 
 class CommentCreateSerializer(ModelSerializer):
+        user = UserDetailSerializer(read_only=True)
         type = serializers.CharField(required=False, write_only=True) # Post
         slug = serializers.SlugField(write_only=True) # new-title
         parent_id = serializers.IntegerField(required=False)
@@ -25,6 +26,7 @@ class CommentCreateSerializer(ModelSerializer):
             model = Comment
             fields = [
                 'id',
+                'user',
                 'content',
                 'type',
                 'slug',

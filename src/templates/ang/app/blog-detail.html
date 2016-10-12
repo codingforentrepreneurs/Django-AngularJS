@@ -52,7 +52,7 @@
         <br/>
 <div class='row'>
     <div class='col-sm-12' ng-repeat='comment in comments | orderBy: commentOrder | filter: query'>
-            {{ comment.content }}<br/> <small>via {{ comment.user.username }} | <a href='#' ng-click='isShowReplies = !isShowReplies'><span ng-show='!isShowReplies'>Reply/View</span><span ng-show='isShowReplies'>Hide</span>: {{ comment.reply_count }}<a/> <div ng-show='comment.user.username == currentUser'>| <a href='#' class='' confirm-click='Do you want to delete this?' confirmed-click='deleteComment(comment)' >Remove</a></div></small>
+            {{ comment.content }}<br/> <small>via {{ comment.user.username }} | <a href='#' ng-click='isShowReplies = !isShowReplies'><span ng-show='!isShowReplies'>Reply/View</span><span ng-show='isShowReplies'>Hide</span>: {{ comment.reply_count }}<a/></small> <small ng-show='comment.user.username == currentUser'>| <a href='#' class='' confirm-click='Do you want to delete this?' confirmed-click='deleteComment(comment)' >Remove</a></small>
             <br/>
             <div class='col-sm-6' ng-show='isShowReplies'>
                 <comment-reply-thread comment='comment' slug='post.slug'></comment-reply-thread>

@@ -12,8 +12,10 @@ angular.module('core.comment').
                          "<div class=\"panel panel-default\"> " +
                                 "<div class=\"panel-body \">" + 
                                     "{{ r.content }} <br/>" +  
-                                    "<small>via {{ comment.user.username }}</small>" +
-                                    "<small ng-show='comment.user.username == currentUser'>| <a href='#'>Remove</a></small>" +
+                                    "<small>via {{ r.user.username }}</small> " +
+                                    "<small ng-show='r.user.username == currentUser'>|" + 
+                                    " <a confirm-click='Do you want to delete this?' " +
+                                     "confirmed-click='deleteComment(r, comment)' href='#'>Remove</a></small>" +
                                 "</div>" +    
                             "</div>" + 
                         "</div></div>" + 
@@ -50,7 +52,16 @@ angular.module('core.comment').
                         scope.replyError = {}
                     }
                 })
+                scope.deleteComment = function(reply, parentComment){
+                     Comment.delete({"id": reply.id}, function(data){
+                        var index = scope.replies.indexOf(reply)
+                        scope.replies.splice(index, 1)
+                        parentComment.reply_count -= 1
+                    }, function(e_data){
+                        console.log(e_data)
+                    })
 
+                }
                 scope.addCommentReply = function(reply, parentComment) {
                     if (!reply.content) {
                          scope.replyError.content = ['This field is required']

@@ -53,7 +53,8 @@ angular.module('blogDetail').
 
             $scope.deleteComment = function(comment) {
                 comment.$delete({"id": comment.id}, function(data){
-                    $scope.comments.splice(comment, 1)
+                    var index = $scope.comments.indexOf(comment)
+                    $scope.comments.splice(index, 1)
                 }, function(e_data){
                     console.log(e_data)
                 })
