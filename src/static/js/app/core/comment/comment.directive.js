@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('core.comment').
-    directive('commentReplyThread', function(Comment){
+    directive('commentReplyThread', function(Comment, $cookies){
         return {
             restrict: "E",
             scope: {
@@ -12,7 +12,8 @@ angular.module('core.comment').
                          "<div class=\"panel panel-default\"> " +
                                 "<div class=\"panel-body \">" + 
                                     "{{ r.content }} <br/>" +  
-                                    "via {{ user }} | <a href='#'>Remove</a>" +
+                                    "<small>via {{ comment.user.username }}</small>" +
+                                    "<small ng-show='comment.user.username == currentUser'>| <a href='#'>Remove</a></small>" +
                                 "</div>" +    
                             "</div>" + 
                         "</div></div>" + 
@@ -30,7 +31,10 @@ angular.module('core.comment').
                            " <input class='btn btn-default btn-sm' type='submit' value='Reply'/>" + 
                         "</form>" ,
             link: function(scope, element, attr) {
-                scope.user = 'jmitchel3'
+                if ($cookies.get("token")) {
+                    scope.currentUser = $cookies.get("username")
+                }
+                
                 if (scope.comment) {
                     var commentId = scope.comment.id
                     if (commentId){

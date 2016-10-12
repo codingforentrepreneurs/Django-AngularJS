@@ -140,12 +140,14 @@ class CommentSerializer(ModelSerializer):
 class CommentListSerializer(ModelSerializer):
     url = HyperlinkedIdentityField(
         view_name='comments-api:thread')
+    user = UserDetailSerializer(read_only=True)
     reply_count = SerializerMethodField()
     class Meta:
         model = Comment
         fields = [
             'url',
             'id',
+            'user',
             # 'content_type',
             # 'object_id',
             # 'parent',

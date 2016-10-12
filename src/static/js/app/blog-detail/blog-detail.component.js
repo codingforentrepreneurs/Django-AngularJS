@@ -22,7 +22,9 @@ angular.module('blogDetail').
                 }
             }
 
-
+            if ($cookies.get("token")) {
+                $scope.currentUser = $cookies.get("username")
+            }
 
 
 
