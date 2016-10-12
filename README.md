@@ -81,4 +81,6 @@ Team CFE
 
 [34 - Register Detail in AngularJS](../../tree/00f22fa8fa93c1aa67b4f7cc188e903ec90e7afb)
 
+[35 - Comment Delete, User Login Update](../../tree/aba30f042e9c6b59e652d86c2e461ffb4323c644)
+
 
