@@ -12,7 +12,7 @@ angular.module("tryNav").
                 // console.log($item)
                 // console.log($model)
                 // console.log($label)
-                $location.path("/blog/" + $item.id)
+                $location.path("/blog/" + $item.slug) // $item.slug was added after completion of content
                 scope.searchQuery = ""
             }
             scope.seachItem = function(){
